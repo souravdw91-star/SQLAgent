@@ -1,5 +1,6 @@
 import streamlit as st
 from src.agent.builder import build_sql_agent
+from src.utils.parser import extract_clean_text
 
 st.set_page_config(page_title="MySQL Gemini Agent", page_icon="🗄️", layout="wide")
 
@@ -37,7 +38,7 @@ if prompt := st.chat_input("e.g., Which 5 customers placed the most orders last 
             try:
                 # Execution with LangSmith auto-tracing
                 response = st.session_state.agent.invoke({"input": prompt})
-                output_text = response.get("output", "No result returned.")
+                output_text = extract_clean_text(response.get("output", "No result returned."))
                 st.markdown(output_text)
                 
                 # Append to chat history

@@ -1,5 +1,6 @@
 import sys
 from src.agent.builder import build_sql_agent
+from src.utils.parser import extract_clean_text
 
 def main():
     try:
@@ -24,7 +25,8 @@ def main():
 
             response = agent.invoke({"input": user_input})
             print("\n--- Answer ---")
-            print(response.get("output", "No response generated."))
+            clean_output = extract_clean_text(response.get("output", ""))
+            print(clean_output)
 
         except KeyboardInterrupt:
             print("\nAborted by user.")

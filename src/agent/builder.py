@@ -13,7 +13,8 @@ def build_sql_agent():
     llm = ChatGoogleGenerativeAI(
         model=settings.GEMINI_MODEL,
         temperature=0,
-        google_api_key=settings.GOOGLE_API_KEY
+        google_api_key=settings.GOOGLE_API_KEY,
+        streaming=False
     )
 
     # 3. DB & Toolkit setup
